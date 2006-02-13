@@ -51,8 +51,8 @@ void
 TimeProbe
 ::Stop(void)
 {
-  double c = ((double)( clock() - m_ClockStart )) / CLOCKS_PER_SEC;
-  double rtc = m_RealTimeClock->GetTimeStamp() - m_RealTimeClockStart;
+  TimeStampType c = ((TimeStampType)( clock() - m_ClockStart )) / CLOCKS_PER_SEC;
+  TimeStampType rtc = m_RealTimeClock->GetTimeStamp() - m_RealTimeClockStart;
   m_ClockValues.push_back( c );
   m_RealTimeClockValues.push_back( rtc );
 }
@@ -61,9 +61,9 @@ TimeProbe
 
 TimeProbe::TimeStampType
 TimeProbe
-::GetMean(ListType list)
+::GetMean(const ListType list)
 {
-  double mean = 0;
+  TimeStampType mean = 0;
   for( ListType::const_iterator it = list.begin(); it!=list.end(); it++ )
     {
     mean += *it;
@@ -90,9 +90,9 @@ TimeProbe
 
 TimeProbe::TimeStampType
 TimeProbe
-::GetMedian(ListType list)
+::GetMedian(const ListType list)
 {
-  double mean = 0;
+  TimeStampType mean = 0;
   for( ListType::const_iterator it = list.begin(); it!=list.end(); it++ )
     {
     mean += *it;
@@ -118,9 +118,9 @@ TimeProbe
 
 TimeProbe::TimeStampType
 TimeProbe
-::GetMax(ListType list)
+::GetMax(const ListType list)
 {
-  double max = 0;
+  TimeStampType max = 0;
   for( ListType::const_iterator it = list.begin(); it!=list.end(); it++ )
     {
     max = std::max( *it, max );
@@ -148,9 +148,9 @@ TimeProbe
 
 TimeProbe::TimeStampType
 TimeProbe
-::GetMin(ListType list)
+::GetMin(const ListType list)
 {
-  double min = NumericTraits<double>::max();
+  TimeStampType min = NumericTraits<TimeStampType>::max();
   for( ListType::const_iterator it = list.begin(); it!=list.end(); it++ )
     {
     min = std::min( *it, min );
@@ -176,9 +176,9 @@ TimeProbe
 
 TimeProbe::TimeStampType
 TimeProbe
-::GetSigma(ListType list)
+::GetSigma(const ListType list)
 {
-  double min = 0;
+  TimeStampType min = 0;
   for( ListType::const_iterator it = list.begin(); it!=list.end(); it++ )
     {
     min = std::min( *it, min );

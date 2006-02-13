@@ -50,7 +50,7 @@ public:
   typedef RealTimeClock::TimeStampType  TimeStampType;
   typedef clock_t       ClickType;
 
-  typedef std::vector<double> ListType;
+  typedef std::vector<TimeStampType> ListType;
 
 public:
 
@@ -68,26 +68,26 @@ public:
 
   CountType     GetSize(void) const;
 
-  double GetRealTimeClockMean();
-  double GetRealTimeClockMedian();
-  double GetRealTimeClockMax();
-  double GetRealTimeClockMin();
-  double GetRealTimeClockSigma();
+  TimeStampType GetRealTimeClockMean();
+  TimeStampType GetRealTimeClockMedian();
+  TimeStampType GetRealTimeClockMax();
+  TimeStampType GetRealTimeClockMin();
+  TimeStampType GetRealTimeClockSigma();
 //   itkGetConstMacro(RealTimeClockValues, ListType);
 
 
-  double GetClockMean();
-  double GetClockMedian();
-  double GetClockMax();
-  double GetClockMin();
-  double GetClockSigma();
+  TimeStampType GetClockMean();
+  TimeStampType GetClockMedian();
+  TimeStampType GetClockMax();
+  TimeStampType GetClockMin();
+  TimeStampType GetClockSigma();
 //   itkGetConstMacro(ClockValues, ListType);
 
-  double GetMean(ListType);
-  double GetMedian(ListType);
-  double GetMax(ListType);
-  double GetMin(ListType);
-  double GetSigma(ListType);
+  static TimeStampType GetMean(const ListType);
+  static TimeStampType GetMedian(const ListType);
+  static TimeStampType GetMax(const ListType);
+  static TimeStampType GetMin(const ListType);
+  static TimeStampType GetSigma(const ListType);
 
   /** Returns the average times passed between the starts and stops of the
    * probe. See the RealTimeClock for details on the precision and units of
@@ -99,7 +99,7 @@ private:
   ListType  m_RealTimeClockValues;
   ListType  m_ClockValues;
 
-  double m_RealTimeClockStart;
+  TimeStampType m_RealTimeClockStart;
   ClickType m_ClockStart;
 
   RealTimeClock::Pointer   m_RealTimeClock;
