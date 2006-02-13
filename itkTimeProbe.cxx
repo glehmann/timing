@@ -17,6 +17,7 @@
 
 #include "itkTimeProbe.h"
 #include "itkNumericTraits.h"
+#include "vnl/vnl_math.h"
 
 namespace itk
 {
@@ -178,12 +179,13 @@ TimeProbe::TimeStampType
 TimeProbe
 ::GetSigma(const ListType list)
 {
-  TimeStampType min = 0;
+  TimeStampType mean = GetMean( list );
+  TimeStampType squaredSum = NumericTraits<TimeStampType>::Zero;
   for( ListType::const_iterator it = list.begin(); it!=list.end(); it++ )
-    {
-    min = std::min( *it, min );
-    }
-  return 0;
+      {
+      squaredSum += vnl_math_sqr(*it - mean);
+      }
+    return vcl_sqrt( squaredSum / ( list.size() - 1) );
 }
 
 TimeProbe::TimeStampType
