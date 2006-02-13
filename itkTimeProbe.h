@@ -83,11 +83,11 @@ public:
   TimeStampType GetClockSigma();
 //   itkGetConstMacro(ClockValues, ListType);
 
-  static TimeStampType GetMean(const ListType);
-  static TimeStampType GetMedian(const ListType);
-  static TimeStampType GetMax(const ListType);
-  static TimeStampType GetMin(const ListType);
-  static TimeStampType GetSigma(const ListType);
+  static TimeStampType GetMean(const ListType &);
+  static TimeStampType GetMedian(const ListType &);
+  static TimeStampType GetMax(const ListType &);
+  static TimeStampType GetMin(const ListType &);
+  static TimeStampType GetSigma(const ListType &);
 
   /** Returns the average times passed between the starts and stops of the
    * probe. See the RealTimeClock for details on the precision and units of

@@ -18,6 +18,7 @@
 #include "itkTimeProbe.h"
 #include "itkNumericTraits.h"
 #include "vnl/vnl_math.h"
+#include <algorithm>
 
 namespace itk
 {
@@ -62,7 +63,7 @@ TimeProbe
 
 TimeProbe::TimeStampType
 TimeProbe
-::GetMean(const ListType list)
+::GetMean(const ListType &list)
 {
   TimeStampType mean = 0;
   for( ListType::const_iterator it = list.begin(); it!=list.end(); it++ )
@@ -91,14 +92,12 @@ TimeProbe
 
 TimeProbe::TimeStampType
 TimeProbe
-::GetMedian(const ListType list)
+::GetMedian(const ListType &list)
 {
-  TimeStampType mean = 0;
-  for( ListType::const_iterator it = list.begin(); it!=list.end(); it++ )
-    {
-    mean += *it;
-    }
-  return 0;
+  ListType tmpList(list);
+  const ListType::iterator medianIterator = tmpList.begin() +  tmpList.size() / 2;
+  std::nth_element(tmpList.begin(), medianIterator, tmpList.end() );
+  return *medianIterator;
 }
 
 TimeProbe::TimeStampType
@@ -119,7 +118,7 @@ TimeProbe
 
 TimeProbe::TimeStampType
 TimeProbe
-::GetMax(const ListType list)
+::GetMax(const ListType &list)
 {
   TimeStampType max = 0;
   for( ListType::const_iterator it = list.begin(); it!=list.end(); it++ )
@@ -149,7 +148,7 @@ TimeProbe
 
 TimeProbe::TimeStampType
 TimeProbe
-::GetMin(const ListType list)
+::GetMin(const ListType &list)
 {
   TimeStampType min = NumericTraits<TimeStampType>::max();
   for( ListType::const_iterator it = list.begin(); it!=list.end(); it++ )
@@ -177,7 +176,7 @@ TimeProbe
 
 TimeProbe::TimeStampType
 TimeProbe
-::GetSigma(const ListType list)
+::GetSigma(const ListType &list)
 {
   TimeStampType mean = GetMean( list );
   TimeStampType squaredSum = NumericTraits<TimeStampType>::Zero;
