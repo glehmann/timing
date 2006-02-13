@@ -1,5 +1,5 @@
 #Change PROJECT_NAME to the name of your project
-PROJECT()
+PROJECT(timing)
 
 # set the name of the input image used to run the test
 SET(INPUT_IMAGE ${CMAKE_SOURCE_DIR}/images/cthead1.png)
@@ -58,7 +58,7 @@ ENDIF(BUILD_WRAPPERS)
 #You can build more than one executable per project
 
 SET(CurrentExe "check")
-ADD_EXECUTABLE(${CurrentExe} ${CurrentExe}.cxx)
+ADD_EXECUTABLE(${CurrentExe} ${CurrentExe}.cxx itkTimeProbe.cxx)
 TARGET_LINK_LIBRARIES(${CurrentExe} ${Libraries})
 
 #the following line is an example of how to add a test to your project.
